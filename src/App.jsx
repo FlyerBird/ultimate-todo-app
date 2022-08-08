@@ -1,7 +1,7 @@
 import './App.css';
 import SearchBar from './components/SearchBar';
 import TaskCard from './components/TaskCard';
-import CreateTask from './components/CreateTask';
+import CreateTaskForm from './components/CreateTaskForm';
 import UrgentTasks from './components/UrgentTasks';
 import React, {useState} from 'react';
 import { v4 as uuidv4 } from 'uuid';
@@ -58,8 +58,18 @@ function App() {
     
   ]
 
+  /************ ADD TASK ***************/
+
   const [tasks, setTasks] = useState(taskData);
-  console.log(tasks);
+  const [showCreateForm, setShowCreateForm] = useState(false);
+
+  const handleCreateTask = (task) => {
+    console.log(task)
+    task.id = uuidv4();
+    const copy = [...tasks];
+    copy.push(task);
+    setTasks(copy);
+  }
   
   return (
     <div className="App">
@@ -67,7 +77,8 @@ function App() {
 
     <div className='Header'>
       <div>
-          <CreateTask />
+          <button className='card__button' onClick={() => setShowCreateForm(prev => !prev)}>{!showCreateForm ? "Create New Task" : "Hide"}</button>
+          {showCreateForm && <CreateTaskForm newTask={handleCreateTask}/>}
         </div>
         <div>
           <UrgentTasks />
@@ -79,7 +90,7 @@ function App() {
         </div>
 
         <div className='cardContainer'>
-          <h1>All Tasks</h1>
+          <h2>All Tasks</h2>
           <TaskCard tasks={tasks}/>
         </div>
         
