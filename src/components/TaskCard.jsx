@@ -1,6 +1,6 @@
 import React from 'react'
 
-export default function AllTasks(props) {
+export default function TaskCard(props) {
   const {tasks} = props;
 
   return (
@@ -14,7 +14,7 @@ export default function AllTasks(props) {
               <p className="card__description">{task.description}</p>
               <p className="card__urgency">{task.urgency}</p>
               <button className="card__button">Edit</button>
-              <button className="card__button">Delete</button>
+              <button className="card__button" onClick={() => props.handleDelete (task.id)} >Delete</button>
           
             </div>
           )

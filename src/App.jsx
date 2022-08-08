@@ -2,7 +2,6 @@ import './App.css';
 import SearchBar from './components/SearchBar';
 import TaskCard from './components/TaskCard';
 import CreateTaskForm from './components/CreateTaskForm';
-import UrgentTasks from './components/UrgentTasks';
 import React, {useState} from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
@@ -62,6 +61,7 @@ function App() {
 
   const [tasks, setTasks] = useState(taskData);
   const [showCreateForm, setShowCreateForm] = useState(false);
+  
 
   const handleCreateTask = (task) => {
     console.log(task)
@@ -70,19 +70,31 @@ function App() {
     copy.push(task);
     setTasks(copy);
   }
-  
+
+   /************ SORT TASK BY URGENCY***************/
+
+   const handleSortByUrgency = () => {
+    const ordered = [...tasks].sort((a, b) => b.urgency - a.urgency);
+    setTasks(ordered)
+   }
+
+   /************ DELETE TASK***************/
+   const handleDelete = (id) => {
+    setTasks(tasks.filter(task => task.id !== id))
+    
+  }
+
   return (
     <div className="App">
-    <h1>MY TO DO LIST</h1>
 
+    <h1>MY TO DO LIST</h1>
+    
     <div className='Header'>
       <div>
-          <button className='card__button' onClick={() => setShowCreateForm(prev => !prev)}>{!showCreateForm ? "Create New Task" : "Hide"}</button>
           {showCreateForm && <CreateTaskForm newTask={handleCreateTask}/>}
-        </div>
-        <div>
-          <UrgentTasks />
-        </div>
+          <button className='card__button' onClick={() => setShowCreateForm(prev => !prev)}>{!showCreateForm ? "Create New Task" : "Hide"}</button>
+          <button className='card__button' onClick={handleSortByUrgency}>Sort by urgency</button>
+      </div>
     </div>
    
         <div>
@@ -91,7 +103,9 @@ function App() {
 
         <div className='cardContainer'>
           <h2>All Tasks</h2>
-          <TaskCard tasks={tasks}/>
+          {}
+          <TaskCard tasks={tasks} handleDelete={handleDelete}/>
+          
         </div>
         
     </div>
