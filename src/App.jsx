@@ -1,9 +1,12 @@
 import './App.css';
-import SearchBar from './components/SearchBar';
 import TaskCard from './components/TaskCard';
 import CreateTaskForm from './components/CreateTaskForm';
 import React, {useState} from 'react';
 import { v4 as uuidv4 } from 'uuid';
+import SearchBar from './components/SearchBar';
+
+
+
 
 function App() {
 
@@ -57,12 +60,11 @@ function App() {
     
   ]
 
-  /************ ADD TASK ***************/
-
   const [tasks, setTasks] = useState(taskData);
   const [showCreateForm, setShowCreateForm] = useState(false);
-  
 
+
+  /************ ADD TASK ***************/
   const handleCreateTask = (task) => {
     console.log(task)
     task.id = uuidv4();
@@ -72,17 +74,31 @@ function App() {
   }
 
    /************ SORT TASK BY URGENCY***************/
-
    const handleSortByUrgency = () => {
     const ordered = [...tasks].sort((a, b) => b.urgency - a.urgency);
     setTasks(ordered)
    }
 
-   /************ DELETE TASK***************/
-   const handleDelete = (id) => {
-    setTasks(tasks.filter(task => task.id !== id))
-    
+  /************ SEARCHTASK***************/
+   const handleSearch = (searchValue) => {
+    if (searchValue === '') {
+      setTasks(taskData)
+    } else {
+      const filtered = tasks.filter(el => el.name.toLocaleLowerCase().includes((searchValue).toLocaleLowerCase()))
+      setTasks(filtered)
+    }
   }
+
+   /************ DELETE TASK***************/
+  const handleDelete = (id) => {
+    const filteredTasks = tasks.filter(el => {
+      return el.id !== id
+    })
+    setTasks(filteredTasks)
+  }
+
+
+  
 
   return (
     <div className="App">
@@ -92,23 +108,26 @@ function App() {
     <div className='Header'>
       <div>
           {showCreateForm && <CreateTaskForm newTask={handleCreateTask}/>}
-          <button className='card__button' onClick={() => setShowCreateForm(prev => !prev)}>{!showCreateForm ? "Create New Task" : "Hide"}</button>
+          <button className='card__button' onClick={() => setShowCreateForm(prev => !prev)}>{!showCreateForm ? "Create New Task" : "Hide Form"}</button>
           <button className='card__button' onClick={handleSortByUrgency}>Sort by urgency</button>
       </div>
     </div>
-   
-        <div>
-          <SearchBar />
-        </div>
-
-        <div className='cardContainer'>
-          <h2>All Tasks</h2>
-          {}
-          <TaskCard tasks={tasks} handleDelete={handleDelete}/>
-          
-        </div>
-        
+    
+    <div className='SearchBar'>
+    <SearchBar onSearch={handleSearch} />
     </div>
+   
+    <div className='allCards' >
+      {tasks.map(el => {
+        return <TaskCard key={el.id} info={el} onDelete={handleDelete} />
+      })}
+    </div>   
+
+  
+</div>
+
+    
+
   );
 }
 
