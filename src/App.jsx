@@ -102,21 +102,27 @@ function App() {
 
   return (
     <div className="App">
+      <div className='Actions'>
 
-    <h1>MY TO DO LIST</h1>
-    
-    <div className='Header'>
       <div>
+      <h1>TO DO LIST</h1>
+      </div>
+        
+   
+        <div className='Header'>
+          <div className="formAndButtonsBox">
           {showCreateForm && <CreateTaskForm newTask={handleCreateTask}/>}
           <button className='card__button' onClick={() => setShowCreateForm(prev => !prev)}>{!showCreateForm ? "Create New Task" : "Hide Form"}</button>
           <button className='card__button' onClick={handleSortByUrgency}>Sort by urgency</button>
-      </div>
-    </div>
+          </div>
+        </div>
     
-    <div className='SearchBar'>
-    <SearchBar onSearch={handleSearch} />
-    </div>
-   
+        <div className='SearchBar'>
+          <SearchBar onSearch={handleSearch} />
+        </div>
+      </div>
+    
+
     <div className='allCards' >
       {tasks.map(el => {
         return <TaskCard key={el.id} info={el} onDelete={handleDelete} />
