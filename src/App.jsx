@@ -8,6 +8,7 @@ import SearchBar from './components/SearchBar';
 
 
 
+
 function App() {
 
   const taskData = [
@@ -62,6 +63,7 @@ function App() {
 
   const [tasks, setTasks] = useState(taskData);
   const [showCreateForm, setShowCreateForm] = useState(false);
+  
 
 
   /************ ADD TASK ***************/
@@ -118,7 +120,7 @@ function App() {
         </div>
     
         <div className='SearchBar'>
-          <SearchBar onSearch={handleSearch} />
+          <SearchBar  onSearch={handleSearch}   />
         </div>
       </div>
     
