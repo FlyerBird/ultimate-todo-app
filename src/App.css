@@ -11,11 +11,39 @@
     text-align: center;
     display: flex;
     flex-direction: column;
-    gap: 40px;
     background-color: rgb(232, 223, 223);
   }
 
+  .nav{
+    display: flex;
+    justify-content: flex-end;
+   
+  }
 
+  #dark .nav{
+    background-color: rgb(26, 25, 25);
+  }
+
+  #light .nav{
+    background-color: rgb(236, 141, 141);
+  }
+
+  .switchButton{
+    display: flex;
+    margin: 1rem;
+  }
+
+  #dark .switchButton{
+    background-color: rgb(26, 25, 25);
+  }
+
+  #light {
+    background-color: rgb(232, 223, 223)
+  }
+  
+  #dark {
+    background-color: #3b3a3b;
+  }
 
   .Actions {
     
@@ -28,6 +56,10 @@
     align-items: center;
     padding-top: 30px;
     
+  }
+
+  #dark .Actions{
+    background-color: rgb(26, 25, 25);
   }
 
   h1{
@@ -48,6 +80,41 @@
   
  }
 
+   /****************** FORM ************************/
+   form{
+    display: flex;
+    justify-content: center; 
+   }
+
+   .addForm input {
+    background-color: rgb(229, 228, 228);
+    border: 0;
+    width: 19rem;
+    height: 2rem;
+    padding: 0 20px;
+    font-size: 18px;
+    border-radius: 0.4rem;
+  }
+
+  .addForm button {
+    box-shadow: 0px 10px 14px -7px #276873;
+    background:linear-gradient(to bottom, #dbecde 5%, #e4f1e7 100%);
+    border-radius:0.4rem;
+    cursor:pointer;
+    color:#181a18;
+    font-size:1rem;
+    font-weight:bold;
+    height: 2rem;
+    margin-bottom: 20px;
+    border: 1px solid black;
+  }
+  .addForm button:hover {
+    background:linear-gradient(to bottom, #5aed64 5%, #3fc93c 100%);
+    color:#ecf4ec;
+    border: 1px solid #ecf4ec;
+    
+  }
+
     /****************** SEARCH BAR ************************/
     .SearchBar{
       display: flex;
@@ -66,13 +133,12 @@
       border-radius: 0.4rem;
     }
 
+    /*
     .SearchBar input::placeholder{
       color: white;
     }
+    */
 
-    .SearchBar input::focus{
-      outline: none;
-    }
 
   /****************** CARD TASK ************************/
 
@@ -88,6 +154,7 @@
     gap: 2rem;
     justify-content: center;
     align-content: center;
+    margin-top: 40px;
     margin-bottom: 40px;
   }
 
@@ -97,7 +164,6 @@
     border-radius: 0.2rem;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     transition: transform 200ms ease-in;
     background-color: azure;
   }
@@ -120,7 +186,6 @@
   .card__button {
     box-shadow: 0px 10px 14px -7px #276873;
     background:linear-gradient(to bottom, #eb176c 5%, #408c99 100%);
-    background-color:#eb176c;
     border-radius:0.4rem;
     cursor:pointer;
     color:#ffffff;
@@ -140,14 +205,13 @@
   .card__buttonIn{
   box-shadow: 0px 1px 0px 0px #1c1b18;
 	background:linear-gradient(to bottom, #e45555 5%, #3d0404 100%);
-	background-color:#f52727;
 	border-radius:15px;
 	cursor:pointer;
 	color:#ffffff;
 	font-size:16px;
+  font-weight: 600;
   padding: 5px 10px;
 	text-decoration:none;
-	text-shadow:0px 1px 0px #ffffff;
   width:fit-content;
   margin: 10px;
   border: none;
@@ -163,18 +227,39 @@
   .buttonsInCard{
     display: flex;
     justify-content:center;
+    
+    
 
+  }
+
+  .card__title{
+    display: flex;
+    text-align:initial;
+  }
+
+  .dadUrgency{
+      display: flex;
+      justify-content:flex-end;
+      margin-top: 2px;
+  }
+  .card__urgency{
+    color: white;
+    width: 4rem;
     
   }
 
-  .cardContainer h2{
-    padding: 10rem;
-
+  .card__urgency p{
+    font-weight: 600;
+    border-radius: 15px 0px 0px 15px;
   }
 
-  .card__urgency{
-    color: white;
-  }
+ .descriptionBox{
+  height: 100px
+ }
 
- 
- 
+ .card__description{
+  display: flex;
+  text-align:justify;
+  font-weight: 600;
+ }
+

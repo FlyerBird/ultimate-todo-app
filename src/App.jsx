@@ -1,15 +1,16 @@
 import './App.css';
 import TaskCard from './components/TaskCard';
 import CreateTaskForm from './components/CreateTaskForm';
-import React, {useState} from 'react';
-import { v4 as uuidv4 } from 'uuid';
 import SearchBar from './components/SearchBar';
+import React, {createContext, useState} from 'react';
+import { v4 as uuidv4 } from 'uuid';
+import ReactSwitch from "react-switch";
 
-
-
+export const ThemeContext = createContext(null);
 
 
 function App() {
+
 
   const taskData = [
     
@@ -63,8 +64,14 @@ function App() {
 
   const [tasks, setTasks] = useState(taskData);
   const [showCreateForm, setShowCreateForm] = useState(false);
-  
 
+  const [theme, setTheme] = useState("light");
+
+
+  /************ DARK/LIGHT MODE ***************/
+  const toggleTheme = () => {
+    setTheme((curr) => (curr === "light" ? "dark" : "light"));
+  };
 
   /************ ADD TASK ***************/
   const handleCreateTask = (task) => {
@@ -100,18 +107,25 @@ function App() {
   }
 
 
-  
 
   return (
-    <div className="App">
-      <div className='Actions'>
+    <ThemeContext.Provider value={{ theme, toggleTheme }}>
+      <div className="App" id={theme}>
 
-      <div>
-      <h1>TO DO LIST</h1>
-      </div>
+        <div className='nav'>
+          <div className='switchButton'>
+            <ReactSwitch onChange={toggleTheme} checked={theme === "light"}/> 
+          </div>
+        </div>
+         
+    
+        <div className='Actions'>
+          <div>
+            <h1>TO DO LIST</h1>
+          </div>
         
    
-        <div className='Header'>
+          <div className='Header'>
           <div className="formAndButtonsBox">
           {showCreateForm && <CreateTaskForm newTask={handleCreateTask}/>}
           <button className='card__button' onClick={() => setShowCreateForm(prev => !prev)}>{!showCreateForm ? "Create New Task" : "Hide Form"}</button>
@@ -129,12 +143,10 @@ function App() {
       {tasks.map(el => {
         return <TaskCard key={el.id} info={el} onDelete={handleDelete} />
       })}
-    </div>   
-
-  
-</div>
-
+    </div>  
     
+</div>
+</ThemeContext.Provider>
 
   );
 }

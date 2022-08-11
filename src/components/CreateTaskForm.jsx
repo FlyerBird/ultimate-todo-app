@@ -7,6 +7,7 @@ export default function CreateTaskForm(props) {
   const [image, setImage] = useState ('');
   const [description, setDescription] = useState ('');
   const [urgency, setUrgency] = useState ('');
+ 
 
   const handleForm = (e) => {
     e.preventDefault();
@@ -15,6 +16,7 @@ export default function CreateTaskForm(props) {
       image: image,
       description: description,
       urgency: parseInt(urgency)
+    
     }
     newTask(task); 
     setName('');
@@ -23,14 +25,19 @@ export default function CreateTaskForm(props) {
     setUrgency('');
   }
 
+
+
   return (
     
-      <form className='addForm' onSubmit={handleForm}>
-        <input type="text" placeholder="Name" value={name} onChange={(e) => {setName(e.target.value)}}/>
+      <form  onSubmit={handleForm}>
+      <div className='addForm'>
+        <input type="text" placeholder="Task Name" value={name} onChange={(e) => {setName(e.target.value)}}/>
         <input type="text" placeholder="Image url" value={image} onChange={(e) => {setImage(e.target.value)}}/>
         <input type="text" placeholder="Description" value={description} onChange={(e) => {setDescription(e.target.value)}}/>
-        <input type="number" placeholder="Urgency"value={urgency} onChange={(e) => {setUrgency(e.target.value)}}/>
+        <input type="number" placeholder="Urgency Number"value={urgency} onChange={(e) => {setUrgency(e.target.value)}}/>
+      
         <button type="submit">Create</button>
+      </div>
       </form>
     
   )
