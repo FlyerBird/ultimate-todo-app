@@ -1,9 +1,19 @@
-import React from 'react';
+import React, {useState} from 'react';
 
 export default function TaskCard(props) {
   const { info: { id, name, image, description, urgency}, onDelete} = props;
 
   const coloredUrgency = urgency;
+
+  const [itsDone, setItsDone] = useState(false);
+
+  const handleClick = () => {
+    // toggle
+    setItsDone(current => !current);
+
+    // or set to true
+    // setIsActive(true);
+  };
 
   return (
     
@@ -30,6 +40,7 @@ export default function TaskCard(props) {
               </div>
               
               <div className='buttonsInCard'>
+                <button className="button__done" style={{ backgroundColor: itsDone ?  '#3fc93c' : '', color: itsDone ? 'white' : '', }} onClick={handleClick}>Done</button>
                 <button className="card__buttonIn"  onClick={() => onDelete(id)}>Delete</button>
               </div>
               

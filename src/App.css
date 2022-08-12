@@ -168,6 +168,12 @@
     background-color: azure;
   }
 
+  #dark .eachCard{
+    background-color: #2e282e;
+    color: rgb(219, 217, 217);
+    
+  }
+
   .card__image {
     height: 10rem;
     width: 100%;
@@ -181,6 +187,7 @@
 
   .card__description {
     padding: 0 1rem;
+    
   }
 
   .card__button {
@@ -215,8 +222,17 @@
   width:fit-content;
   margin: 10px;
   border: none;
+  }
 
-    
+  .button__done{
+    cursor:pointer;
+    border: none;
+    border-radius:15px;
+    width:fit-content;
+    margin: 10px;
+    font-size:16px;
+    font-weight: 600;
+    padding: 5px 10px;
   }
 
   .card__buttonIn:hover {
